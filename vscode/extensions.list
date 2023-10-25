@@ -1,0 +1,16 @@
+Azurite.azurite
+ms-azuretools.azure-dev
+ms-azuretools.data-mapper-vscode-extension
+ms-azuretools.vscode-azureappservice
+ms-azuretools.vscode-azurecontainerapps
+ms-azuretools.vscode-azurefunctions
+ms-azuretools.vscode-azurelogicapps
+ms-azuretools.vscode-azureresourcegroups
+ms-azuretools.vscode-azurestaticwebapps
+ms-azuretools.vscode-azurestorage
+ms-azuretools.vscode-azurevirtualmachines
+ms-azuretools.vscode-cosmosdb
+ms-dotnettools.csharp
+ms-dotnettools.vscode-dotnet-runtime
+ms-vscode.azure-account
+ms-vscode.vscode-node-azure-pack

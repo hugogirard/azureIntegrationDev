@@ -1,0 +1,88 @@
+{
+	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
+	"CreationDate" : "2023-10-25T00:30:00.635-00:00",
+	"Sources" : 
+	[
+		{
+			"Packages" : 
+			[
+				{
+					"PackageIdentifier" : "Docker.DockerDesktop",
+					"Version" : "4.24.2"
+				},
+				{
+					"PackageIdentifier" : "Git.Git",
+					"Version" : "2.42.0.2"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.Edge",
+					"Version" : "118.0.2088.61"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DotNet.Runtime.6",
+					"Version" : "6.0.23"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DotNet.HostingBundle.6",
+					"Version" : "6.0.23"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DotNet.AspNetCore.6",
+					"Version" : "6.0.23"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DotNet.Runtime.6",
+					"Version" : "6.0.24"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DotNet.Runtime.7",
+					"Version" : "7.0.12"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.Azure.StorageExplorer",
+					"Version" : "1.31.2"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DotNet.AspNetCore.6",
+					"Version" : "6.0.23"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VisualStudioCode",
+					"Version" : "1.83.1"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.Azure.FunctionsCoreTools",
+					"Version" : "4.0.5413"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.AzureCLI",
+					"Version" : "2.53.1"
+				},
+				{
+					"PackageIdentifier" : "GitHub.cli",
+					"Version" : "2.37.0"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.Azure.CosmosEmulator",
+					"Version" : "2.14.12"
+				},
+				{
+					"PackageIdentifier" : "OpenJS.NodeJS.LTS",
+					"Version" : "18.18.0"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DotNet.SDK.7",
+					"Version" : "7.0.402"
+				}
+			],
+			"SourceDetails" : 
+			{
+				"Argument" : "https://cdn.winget.microsoft.com/cache",
+				"Identifier" : "Microsoft.Winget.Source_8wekyb3d8bbwe",
+				"Name" : "winget",
+				"Type" : "Microsoft.PreIndexed.Package"
+			}
+		}
+	],
+	"WinGetVersion" : "1.6.2771"
+}

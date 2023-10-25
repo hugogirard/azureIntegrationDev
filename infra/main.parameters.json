@@ -1,0 +1,25 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "location": {
+        "value": "${AZURE_LOCATION}"
+      },
+      "resourceGroupName": {
+        "value": "${AZURE_RESOURCE_GROUP_NAME}"
+      },
+      "adminPassword": {
+        "value": "${AZURE_ADMIN_PASSWORD}"
+      },
+      "adminUsername": {
+        "value": "${AZURE_ADMIN_USERNAME}"
+      },
+      "vnetConfiguration": {
+        "value": {
+          "name": "${AZURE_ON_PREM_VNET_NAME}",
+          "addressPrefix": "${AZURE_VNET_PREFIX}",
+          "subnetdevPrefix": "${AZURE_SUBNET_DEV_PREFIX}"
+        }
+      }
+    }
+}
