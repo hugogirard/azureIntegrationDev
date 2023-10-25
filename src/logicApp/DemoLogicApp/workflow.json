@@ -1,0 +1,115 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Create_or_update_item": {
+                "type": "ServiceProvider",
+                "inputs": {
+                    "parameters": {
+                        "databaseId": "ais",
+                        "containerId": "request",
+                        "item": "@outputs('Compose')",
+                        "partitionKey": "@body('Parse_JSON')?['by']",
+                        "isUpsert": true
+                    },
+                    "serviceProviderConfiguration": {
+                        "connectionName": "AzureCosmosDB",
+                        "operationId": "CreateOrUpdateDocument",
+                        "serviceProviderId": "/serviceProviders/AzureCosmosDB"
+                    }
+                },
+                "runAfter": {
+                    "Compose": [
+                        "SUCCEEDED"
+                    ]
+                }
+            },
+            "Parse_JSON": {
+                "type": "ParseJson",
+                "inputs": {
+                    "content": "@triggerBody()",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            },
+                            "by": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "runAfter": {}
+            },
+            "Validate_if_object_created": {
+                "type": "If",
+                "expression": {
+                    "and": [
+                        {
+                            "equals": [
+                                "@outputs('Create_or_update_item')?['statusCode']",
+                                "Created"
+                            ]
+                        }
+                    ]
+                },
+                "actions": {
+                    "Return_created_object": {
+                        "type": "Response",
+                        "kind": "Http",
+                        "inputs": {
+                            "statusCode": 200,
+                            "body": "@body('Create_or_update_item')?['content']"
+                        }
+                    }
+                },
+                "else": {
+                    "actions": {
+                        "Cannot_create_item": {
+                            "type": "Response",
+                            "kind": "Http",
+                            "inputs": {
+                                "statusCode": 500,
+                                "body": "Oops something happen"
+                            }
+                        }
+                    }
+                },
+                "runAfter": {
+                    "Create_or_update_item": [
+                        "SUCCEEDED",
+                        "FAILED",
+                        "TIMEDOUT"
+                    ]
+                }
+            },
+            "Compose": {
+                "type": "Compose",
+                "inputs": {
+                    "id": "@guid()",
+                    "message": "@body('Parse_JSON')?['message']",
+                    "by": "@body('Parse_JSON')?['by']",
+                    "from": "logicApp"
+                },
+                "runAfter": {
+                    "Parse_JSON": [
+                        "SUCCEEDED"
+                    ]
+                }
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "When_a_HTTP_request_is_received": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "method": "POST"
+                }
+            }
+        }
+    },
+    "kind": "Stateful"
+}

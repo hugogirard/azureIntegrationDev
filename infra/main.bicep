@@ -22,11 +22,7 @@ param adminPassword string
 @secure()
 param adminUsername string
 
-// Generate a unique token to be used in naming resources.
-// Remove linter suppression after using.
-#disable-next-line no-unused-vars
-var resourceToken = toLower(uniqueString(rg.name))
-
+var suffix = toLower(uniqueString(rg.name))
 
 // Organize resources in a resource group
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
@@ -52,5 +48,14 @@ module windows 'modules/vm/windows.bicep' = {
     adminUsername: adminUsername
     location: location
     subnetId: vnetOnPrem.outputs.subnetId
+  }
+}
+
+module servicebus 'modules/servicebus/bus.bicep' = {
+  scope: resourceGroup(rg.name)
+  name: 'servicebus'
+  params: {
+    location: location
+    suffix: suffix
   }
 }
