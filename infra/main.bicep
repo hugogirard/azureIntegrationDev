@@ -59,3 +59,54 @@ module servicebus 'modules/servicebus/bus.bicep' = {
     suffix: suffix
   }
 }
+
+module cosmosdb 'modules/cosmosdb/cosmos.bicep' = {
+  scope: resourceGroup(rg.name)
+  name: 'cosmosdb'
+  params: {
+    location: location
+    suffix: suffix
+  }
+}
+
+module monitoring 'modules/monitoring/monitoring.bicep' = {
+  scope: resourceGroup(rg.name)
+  name: 'monitoring'
+  params: {
+    location: location
+    suffix: suffix
+  }
+}
+
+module storage 'modules/storage/storage.bicep' = {
+  scope: resourceGroup(rg.name)
+  name: 'storage'
+  params: {
+    location: location
+    suffix: suffix
+  }
+}
+
+module function 'modules/function/function.bicep' = {
+  scope: resourceGroup(rg.name)
+  name: 'function'
+  params: {
+    appInsightName: monitoring.outputs.appInsightName
+    cosmosDbName: cosmosdb.outputs.cosmosDbName
+    location: location
+    serviceBusName: servicebus.outputs.namespaceName
+    storageName: storage.outputs.storageName
+    suffix: suffix
+  }
+}
+
+module logicapp 'modules/logicapp/logicapp.bicep' = {
+  scope: resourceGroup(rg.name)
+  name: 'logicapp'
+  params: {
+    appInsightName: monitoring.outputs.appInsightName
+    location: location
+    storageName: storage.outputs.storageName
+    suffix: suffix
+  }
+}

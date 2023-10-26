@@ -9,6 +9,16 @@
         "id": "/serviceProviders/AzureCosmosDB"
       },
       "displayName": "CosmosCnx"
+    },
+    "serviceBus": {
+      "parameterValues": {
+        "connectionString": "@appsetting('serviceBus_connectionString')"
+      },
+      "parameterSetName": "connectionString",
+      "serviceProvider": {
+        "id": "/serviceProviders/serviceBus"
+      },
+      "displayName": "ServiceBusCnxString"
     }
   }
 }

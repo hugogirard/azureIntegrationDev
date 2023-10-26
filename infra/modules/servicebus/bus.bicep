@@ -19,3 +19,4 @@ resource topic 'Microsoft.ServiceBus/namespaces/topics@2021-06-01-preview' = {
 }
 
 
+output namespaceName string = sbNamespace.name

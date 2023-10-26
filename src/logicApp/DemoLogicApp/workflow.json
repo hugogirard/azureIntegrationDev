@@ -61,6 +61,27 @@
                         "inputs": {
                             "statusCode": 200,
                             "body": "@body('Create_or_update_item')?['content']"
+                        },
+                        "runAfter": {
+                            "Send_message_to_Service_Bus": [
+                                "SUCCEEDED"
+                            ]
+                        }
+                    },
+                    "Send_message_to_Service_Bus": {
+                        "type": "ServiceProvider",
+                        "inputs": {
+                            "parameters": {
+                                "entityName": "message",
+                                "message": {
+                                    "contentData": "@outputs('Compose')"
+                                }
+                            },
+                            "serviceProviderConfiguration": {
+                                "connectionName": "serviceBus",
+                                "operationId": "sendMessage",
+                                "serviceProviderId": "/serviceProviders/serviceBus"
+                            }
                         }
                     }
                 },

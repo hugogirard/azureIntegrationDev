@@ -1,8 +1,8 @@
+using System.Data.Common;
 using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using FromBodyAttribute = Microsoft.Azure.Functions.Worker.Http.FromBodyAttribute;
 
 namespace Contoso
 {
@@ -16,8 +16,8 @@ namespace Contoso
         }
 
         [Function("DemoFunction")]        
-        public OutputMessage Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
-                                                     [FromBody] InputPayload payload)
+        public OutputMessage Run([HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req,
+                                              [FromBody] InputPayload payload)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
             HttpResponseData response;
@@ -27,10 +27,10 @@ namespace Contoso
                 response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
                 response.WriteString("Welcome to Azure Functions!"); 
 
-                InformationMessage record = new(payload.message,payload.by,"Azure Functions");
+                InformationMessage record = new(Guid.NewGuid().ToString(),payload.message,payload.by,"Azure Functions");
 
                 return new OutputMessage
-                {
+                {                    
                     CosmosRecord = record,
                     ServiceBusRecord = record,
                     HttpResponseData = response
