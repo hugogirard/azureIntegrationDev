@@ -20,6 +20,12 @@
           "addressPrefix": "${AZURE_VNET_PREFIX}",
           "subnetdevPrefix": "${AZURE_SUBNET_DEV_PREFIX}"
         }
+      },
+      "publisherEmail": {
+        "value": "${AZURE_PUBLISHER_NAME}"
+      },
+      "publisherName": {
+        "value": "${AZURE_PUBLISHER_EMAIL}"
       }
     }
 }

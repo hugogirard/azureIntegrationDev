@@ -22,6 +22,15 @@ param adminPassword string
 @secure()
 param adminUsername string
 
+@description('Email address of the publisher for APIM')
+@secure()
+param publisherEmail string
+
+@description('Publisher Name')
+@secure()
+param publisherName string
+
+
 var suffix = toLower(uniqueString(rg.name))
 
 // Organize resources in a resource group
@@ -107,6 +116,17 @@ module logicapp 'modules/logicapp/logicapp.bicep' = {
     appInsightName: monitoring.outputs.appInsightName
     location: location
     storageName: storage.outputs.storageName
+    suffix: suffix
+  }
+}
+
+module apim 'modules/apim/apim.bicep' = {
+  scope: resourceGroup(rg.name)
+  name: 'apim'
+  params: {    
+    location: location
+    publisherEmail: publisherEmail
+    publisherName: publisherName
     suffix: suffix
   }
 }
