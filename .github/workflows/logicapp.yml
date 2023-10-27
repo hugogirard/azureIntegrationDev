@@ -53,17 +53,17 @@ jobs:
           creds: ${{secrets.AZURE_CREDENTIALS}}
           enable-AzPSSession: true 
 
-      # - name: Get publish Profile
-      #   id: publishprofile
-      #   uses: azure/powershell@v1
-      #   with:
-      #     inlineScript: |
-      #       $profile = Get-AzWebAppPublishingProfile `
-      #           -ResourceGroupName ${{ env.RG_NAME }} `
-      #           -Name ${{ secrets.LOGIC_APP_NAME }}
-      #       $profile = $profile.Replace("`r", "").Replace("`n", "")
-      #       Write-Output "::set-output name=profile::$profile"
-      #     azPSVersion: latest
+      - name: Get publish Profile
+        id: publishprofile
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            $profile = Get-AzWebAppPublishingProfile `
+                -ResourceGroupName ${{ env.RG_NAME }} `
+                -Name ${{ secrets.LOGIC_APP_NAME }}
+            $profile = $profile.Replace("`r", "").Replace("`n", "")
+            Write-Output "::set-output name=profile::$profile"
+          azPSVersion: latest
 
       - name: Deploy to Azure Logic App
         uses: Azure/functions-action@v1.3.1
@@ -71,3 +71,4 @@ jobs:
         with:
           app-name: ${{ secrets.LOGIC_APP_NAME }}
           package: '${{ env.LOGICAPP_PACKAGE_PATH }}/output/logic.zip'
+          publish-profile: ${{steps.publishprofile.outputs.profile}}
