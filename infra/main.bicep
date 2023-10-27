@@ -120,13 +120,13 @@ module logicapp 'modules/logicapp/logicapp.bicep' = {
   }
 }
 
-module apim 'modules/apim/apim.bicep' = {
-  scope: resourceGroup(rg.name)
-  name: 'apim'
-  params: {    
-    location: location
-    publisherEmail: publisherEmail
-    publisherName: publisherName
-    suffix: suffix
-  }
-}
+// module apim 'modules/apim/apim.bicep' = {
+//   scope: resourceGroup(rg.name)
+//   name: 'apim'
+//   params: {    
+//     location: location
+//     publisherEmail: publisherEmail
+//     publisherName: publisherName
+//     suffix: suffix
+//   }
+// }

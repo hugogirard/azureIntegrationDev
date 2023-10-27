@@ -22,10 +22,10 @@
         }
       },
       "publisherEmail": {
-        "value": "${AZURE_PUBLISHER_NAME}"
+        "value": "${AZURE_PUBLISHER_EMAIL}"
       },
       "publisherName": {
-        "value": "${AZURE_PUBLISHER_EMAIL}"
+        "value": "${AZURE_PUBLISHER_NAME}"
       }
     }
 }

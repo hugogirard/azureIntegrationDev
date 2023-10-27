@@ -14,6 +14,6 @@ resource apim 'Microsoft.ApiManagement/service@2023-03-01-preview' = {
   }
   sku: {
     name: 'Consumption'
-    capacity: 1
+    capacity: 0
   }
 }

@@ -78,6 +78,14 @@ New-Item -Path wingetpackage.json -ItemType File
 notepad wingetpackage.json
 ```
 
+Now, you need to install Nodejs, seems winget cause problem to install this software sometimes.  Go to the [NodeJS](https://nodejs.org/en) website and download the LTS version.
+
+Once is installed you need to install the Azure Storage Emulator
+
+```powershell
+npm install -g azurite
+```
+
 In the GitHub repository you will have a file with the same name under the directory **softwares**.  Copy the content of it in the file created in the virtual machine.
 
 Once is done, run the following command.
@@ -91,3 +99,38 @@ If any time you add more software using Winget and want to save the list of soft
 ```powershell
 winget export -o wingetpackage.json
 ```
+
+Another important software to install is the ServiceBusExplorer that you can get at this [link](https://github.com/paolosalvatori/ServiceBusExplorer)
+
+Finally, if you need to do infrastructure as code you can install Bicep
+
+```powershell
+winget install -e --id Microsoft.Bicep
+```
+
+# Install Visual Studio Code extensions
+
+Now you need to install the visual studio code extensions.  To do that you need to run the following command.
+
+```powershell
+New-Item -Path extensions.list -ItemType File
+notepad .\extensions.list
+```
+
+Just copy all the extensions you have in the file in the GitHub repository under extensions.list
+
+Once is done, run the following command.
+
+```powershell
+cat extensions.list |% { code --install-extension $_}
+```
+
+# Configure Nuget
+
+Go to the directory **%appdata%\NuGet\** and from there run this command line
+
+```powershell
+dotnet nuget add source https://api.nuget.org/v3/index.json
+```
+
+Now you are ready to develop locally Azure Integration
