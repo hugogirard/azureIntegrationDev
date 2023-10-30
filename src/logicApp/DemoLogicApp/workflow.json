@@ -82,6 +82,9 @@
                                 "operationId": "sendMessage",
                                 "serviceProviderId": "/serviceProviders/serviceBus"
                             }
+                        },
+                        "trackedProperties": {
+                            "by": "@triggerBody()?['by']"
                         }
                     }
                 },
@@ -127,7 +130,21 @@
                 "type": "Request",
                 "kind": "Http",
                 "inputs": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            },
+                            "by": {
+                                "type": "string"
+                            }
+                        }
+                    },
                     "method": "POST"
+                },
+                "correlation": {
+                    "clientTrackingId": "@triggerBody()?['by']"
                 }
             }
         }

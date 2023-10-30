@@ -1,4 +1,4 @@
-name: Deploy Admin Azure Function
+name: Deploy Azure Function
 
 on:
   workflow_dispatch:
