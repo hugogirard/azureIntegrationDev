@@ -2,6 +2,8 @@ param location string
 param storageName string
 param appInsightName string
 param suffix string
+param cosmosDbName string
+param serviceBusName string
 
 resource storageLogicApp 'Microsoft.Storage/storageAccounts@2021-04-01' existing = {
   name: storageName
@@ -10,6 +12,21 @@ resource storageLogicApp 'Microsoft.Storage/storageAccounts@2021-04-01' existing
 resource insight 'Microsoft.Insights/components@2020-02-02' existing = {
   name: appInsightName
 }
+
+resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2023-09-15' existing = {
+  name: cosmosDbName
+}
+
+resource namespace 'Microsoft.ServiceBus/namespaces@2022-10-01-preview' existing = {
+  name: serviceBusName 
+}
+
+// We return the default authorization rules from ServiceBus
+resource defaultAuthorizationRules 'Microsoft.ServiceBus/namespaces/AuthorizationRules@2022-10-01-preview' existing = {
+  name: 'RootManageSharedAccessKey'
+  parent: namespace
+}
+
 
 resource hostingPlanFE 'Microsoft.Web/serverfarms@2018-11-01' = {
   name: 'aspl-${suffix}'
@@ -36,6 +53,14 @@ resource logiapp 'Microsoft.Web/sites@2021-02-01' = {
           name: 'APP_KIND'
           value: 'workflowApp'
         }       
+        {
+          name: 'AzureCosmosDB_connectionString'
+          value: 'AccountEndpoint=https://${cosmosDbAccount.name}.documents.azure.com:443/;AccountKey=${cosmosDbAccount.listKeys().primaryMasterKey};'
+        }
+        {
+          name: 'serviceBus_connectionString'
+          value: 'defaultAuthorizationRules.listKeys().primaryConnectionString'
+        }
         {
           name: 'AzureFunctionsJobHost__extensionBundle__id'
           value: 'Microsoft.Azure.Functions.ExtensionBundle.Workflows'

@@ -117,6 +117,8 @@ module logicapp 'modules/logicapp/logicapp.bicep' = {
     location: location
     storageName: storage.outputs.storageName
     suffix: suffix
+    cosmosDbName: cosmosdb.outputs.cosmosDbName
+    serviceBusName: servicebus.outputs.namespaceName
   }
 }
 
