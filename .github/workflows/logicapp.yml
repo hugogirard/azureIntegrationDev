@@ -65,9 +65,9 @@ jobs:
           azPSVersion: latest
 
       - name: Deploy to Azure Logic App
-        uses: Azure/functions-action@v1.3.1
+        uses: Azure/functions-action@v1
         id: la
         with:
           app-name: ${{ secrets.RG_NAME }}
           package: '${{ env.LOGICAPP_PACKAGE_PATH }}/output/logic.zip'
-          publish-profile: ${{secrets.PUBLISH_PROFILE }}
+          #publish-profile: ${{secrets.PUBLISH_PROFILE }}
