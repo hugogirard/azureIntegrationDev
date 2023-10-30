@@ -59,4 +59,4 @@ jobs:
         id: la
         with:
           app-name: ${{ secrets.LOGIC_APP_NAME }}
-          package: '${{ env.LOGICAPP_PACKAGE_PATH }}/output/logic.zip'
+          package: '${{ env.LOGICAPP_PACKAGE_PATH }}/output/'
