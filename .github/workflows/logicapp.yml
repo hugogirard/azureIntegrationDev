@@ -21,10 +21,7 @@ name: Deploy Logic App
 
 on:
   workflow_dispatch:
-  
-env:
-  LOGICAPP_PACKAGE_PATH: 'src/logicApp'
-
+ 
 jobs:
   logic_app_build-deploy:
 
@@ -38,7 +35,7 @@ jobs:
 
       - name: Package logic
         run: | 
-          cd ${{ env.LOGICAPP_PACKAGE_PATH }}
+          cd src/logicApp
           mkdir -p output
           zip -r ./output/logic.zip .
 
@@ -46,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v3.1.3
         with:
           name: logic
-          path: '${{ env.LOGICAPP_PACKAGE_PATH }}/output/'
+          path: 'src/logicApp/output/'
       
 
       - name: Login via Az module
@@ -59,4 +56,4 @@ jobs:
         id: la
         with:
           app-name: ${{ secrets.LOGIC_APP_NAME }}
-          package: '${{ env.LOGICAPP_PACKAGE_PATH }}/output/'
+          package: 'src/logicApp/output/logic.zip'
