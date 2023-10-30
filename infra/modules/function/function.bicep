@@ -77,7 +77,7 @@ resource functionHl7 'Microsoft.Web/sites@2022-09-01' = {
         }
         {          
           name: 'CosmosDBConnection'
-          value: 'https://${cosmosDbAccount.name}.documents.azure.com:43/;AccountKey=${cosmosDbAccount.listKeys().primaryMasterKey};'
+          value: 'AccountEndpoint=https://${cosmosDbAccount.name}.documents.azure.com:443/;AccountKey=${cosmosDbAccount.listKeys().primaryMasterKey};'
         }
         {
           name: 'outputTopic'

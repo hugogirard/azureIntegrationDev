@@ -77,7 +77,13 @@
 				{
 					"PackageIdentifier" : "Postman.Postman",
 					"Version" : "10.19.7"
-				}								
+				},
+				{
+					"PackageIdentifier" : "Microsoft.NuGet"
+				},
+				{
+					"PackageIdentifier" : "Postman.Postman"
+				}											
 			],
 			"SourceDetails" : 
 			{

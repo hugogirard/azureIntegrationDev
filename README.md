@@ -134,3 +134,22 @@ dotnet nuget add source https://api.nuget.org/v3/index.json
 ```
 
 Now you are ready to develop locally Azure Integration
+
+# Function
+
+Create a local.settings.json
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "CosmosDb": "ais",
+    "CosmosContainerOut": "request",
+    "CosmosDBConnection": "",
+    "outputTopic": "message",
+    "ServiceBusConnection": ""
+  }
+}
+```

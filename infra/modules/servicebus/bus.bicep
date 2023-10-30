@@ -18,5 +18,12 @@ resource topic 'Microsoft.ServiceBus/namespaces/topics@2021-06-01-preview' = {
   properties: {}
 }
 
+resource defaultSubs 'Microsoft.ServiceBus/namespaces/topics/subscriptions@2022-10-01-preview' = {
+  name: 'default'
+  parent: topic
+  properties: {
+  }
+}
+
 
 output namespaceName string = sbNamespace.name

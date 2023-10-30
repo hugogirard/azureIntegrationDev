@@ -23,7 +23,6 @@ on:
   workflow_dispatch:
   
 env:
-  RG_NAME: ${{ secrets.RG_NAME }}
   LOGICAPP_PACKAGE_PATH: 'src/logicApp'
 
 jobs:
@@ -59,7 +58,7 @@ jobs:
         with:
           inlineScript: |
             $profile = Get-AzWebAppPublishingProfile `
-                -ResourceGroupName ${{ env.RG_NAME }} `
+                -ResourceGroupName ${{ secrets.RG_NAME }} `
                 -Name ${{ secrets.LOGIC_APP_NAME }}
             $profile = $profile.Replace("`r", "").Replace("`n", "")
             Write-Output "::set-output name=profile::$profile"
@@ -69,6 +68,6 @@ jobs:
         uses: Azure/functions-action@v1.3.1
         id: la
         with:
-          app-name: ${{ secrets.LOGIC_APP_NAME }}
+          app-name: ${{ secrets.RG_NAME }}
           package: '${{ env.LOGICAPP_PACKAGE_PATH }}/output/logic.zip'
           publish-profile: ${{steps.publishprofile.outputs.profile}}

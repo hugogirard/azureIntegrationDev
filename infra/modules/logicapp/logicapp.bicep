@@ -18,7 +18,7 @@ resource hostingPlanFE 'Microsoft.Web/serverfarms@2018-11-01' = {
     tier: 'WorkflowStandard'
     name: 'WS1'
   }
-  kind: 'windows'
+  kind: ''
 }
 
 resource logiapp 'Microsoft.Web/sites@2021-02-01' = {
@@ -70,7 +70,7 @@ resource logiapp 'Microsoft.Web/sites@2021-02-01' = {
         }
         {
           name: 'WEBSITE_NODE_DEFAULT_VERSION'
-          value: '~16'
+          value: '~18'
         }      
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
