@@ -42,6 +42,13 @@ jobs:
           mkdir -p output
           zip -r ./output/logic.zip .
 
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.3
+        with:
+          name: logic
+          path: '${{ env.LOGICAPP_PACKAGE_PATH }}/output/logic.zip'
+      
+
       - name: Login via Az module
         uses: azure/login@v1
         with:
