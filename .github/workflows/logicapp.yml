@@ -42,27 +42,10 @@ jobs:
           mkdir -p output
           zip -r ./output/logic.zip .
 
-      - name: Check dir
-        run: |
-          ls -la ${{ env.LOGICAPP_PACKAGE_PATH }}
-
       - name: Login via Az module
         uses: azure/login@v1
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
-          enable-AzPSSession: true 
-
-      - name: Get publish Profile
-        id: publishprofile
-        uses: azure/powershell@v1
-        with:
-          inlineScript: |
-            $profile = Get-AzWebAppPublishingProfile `
-                -ResourceGroupName ${{ secrets.RG_NAME }} `
-                -Name ${{ secrets.LOGIC_APP_NAME }}
-            $profile = $profile.Replace("`r", "").Replace("`n", "")
-            Write-Output "::set-output name=profile::$profile"
-          azPSVersion: latest
 
       - name: Deploy to Azure Logic App
         uses: Azure/functions-action@v1
@@ -70,4 +53,3 @@ jobs:
         with:
           app-name: ${{ secrets.RG_NAME }}
           package: '${{ env.LOGICAPP_PACKAGE_PATH }}/output/logic.zip'
-          #publish-profile: ${{secrets.PUBLISH_PROFILE }}
