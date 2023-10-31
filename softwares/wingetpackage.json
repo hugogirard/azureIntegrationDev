@@ -71,8 +71,7 @@
 					"Version" : "7.0.402"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.NuGet",
-					"Version" : "6.7.0.127"
+					"PackageIdentifier" : "Microsoft.NuGet"
 				},
 				{
 					"PackageIdentifier" : "Postman.Postman",

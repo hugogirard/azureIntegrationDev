@@ -29,22 +29,14 @@ az login
 ```
 Once you login, you can create the infrastructure using the following command.
 
-Now you will need to create a folder inside the cloned repository to have the proper configuration needed for the Bicep template.
-
-Run this command
-
 ```bash
 cd <forker_repository>
-mkdir .azure/demo-int-local-dev
+adz init
 ```
 
-Once is done create a file named **.env**
+This will create a file called .env under the azure folder with one value in it called **AZURE_ENV_NAME**.  
 
-The file needs to have those values
-
-![img](./images/env.png)
-
-Here the definition of each variable
+The file needs to have those additional values:
 
 | Variable | Definition |
 | -------- | ---------- |
@@ -57,6 +49,11 @@ Here the definition of each variable
 | AZURE_SUBSCRIPTION_ID | The subscription id where the resources will be created |
 | AZURE_VNET_PREFIX | The address prefix of the virtual network |
 
+Now you can create the resources needed to start using the virtual machine and Azure Integration Services
+
+```bash
+adz up
+```
 Now you can go to the Azure Portal and connect to the virtual machine.
 
 # Install software in the virtual machine
@@ -127,7 +124,7 @@ cat extensions.list |% { code --install-extension $_}
 
 # Configure Nuget
 
-Go to the directory **%appdata%\NuGet\** and from there run this command line
+Go to the directory %appdata%\NuGet\ and from there run this command line
 
 ```powershell
 dotnet nuget add source https://api.nuget.org/v3/index.json
@@ -150,6 +147,25 @@ Create a local.settings.json
     "CosmosDBConnection": "",
     "outputTopic": "message",
     "ServiceBusConnection": ""
+  }
+}
+```
+
+# Logic App
+
+Create a local.settings.json
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "APP_KIND": "workflowapp",
+    "ProjectDirectoryPath": "c:\\github\\azureIntegrationDev\\src\\logicApp",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "WORKFLOWS_SUBSCRIPTION_ID": "",
+    "AzureCosmosDB_connectionString": "",
+    "serviceBus_connectionString": ""
   }
 }
 ```

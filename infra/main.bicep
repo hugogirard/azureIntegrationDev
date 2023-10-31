@@ -1,8 +1,9 @@
 targetScope = 'subscription'
 
-// The main bicep module to provision Azure resources.
-// For a more complete walkthrough to understand how this file works with azd,
-// see https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/make-azd-compatible?pivots=azd-create
+@minLength(1)
+@maxLength(64)
+@description('Name of the the environment which is used to generate a short unqiue hash used in all resources.')
+param environmentName string
 
 @minLength(1)
 @description('Primary location for all resources')
@@ -22,16 +23,8 @@ param adminPassword string
 @secure()
 param adminUsername string
 
-@description('Email address of the publisher for APIM')
-@secure()
-param publisherEmail string
 
-@description('Publisher Name')
-@secure()
-param publisherName string
-
-
-var suffix = toLower(uniqueString(rg.name))
+var suffix = toLower(uniqueString(subscription().id, environmentName, location))
 
 // Organize resources in a resource group
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {

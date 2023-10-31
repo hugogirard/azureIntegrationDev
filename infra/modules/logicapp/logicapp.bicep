@@ -59,7 +59,7 @@ resource logiapp 'Microsoft.Web/sites@2021-02-01' = {
         }
         {
           name: 'serviceBus_connectionString'
-          value: 'defaultAuthorizationRules.listKeys().primaryConnectionString'
+          value: defaultAuthorizationRules.listKeys().primaryConnectionString
         }
         {
           name: 'AzureFunctionsJobHost__extensionBundle__id'
